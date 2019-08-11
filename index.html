@@ -54,8 +54,8 @@
     </div>
   </header>
   <main role="main" class="container content">
-    <div id="portfolioCarousel" class="carousel slide d-none d-md-block" data-ride="carousel"></div>
-
+    <div id="portfolioCarousel" class="carousel slide d-none d-md-block shadow border-bottom" data-ride="carousel"></div>
+    <hr class="d-none d-md-block shadow-sm">
     <div class="project-selector"></div>
   </main>
   <!-- <div class="footer">
@@ -82,6 +82,9 @@
   body {
     background-color: #f2f2f2;
     padding-bottom: 20px;
+  }
+  hr {
+    margin-top: 2rem;
   }
   .header {
     position: fixed;
@@ -169,7 +172,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 25px;
   }
   .project {
     flex: 1;
@@ -186,12 +188,6 @@
     margin-left: auto;
     margin-right: auto;
   }
-  
-  /* @media screen and (max-width: 768px) {
-    .carousel {
-      display: none;
-    }
-  } */
 </style>
 
 </html>
