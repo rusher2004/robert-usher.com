@@ -22,7 +22,7 @@ const projects = [
     "mainImage": "ip_main.png"
   },
   {
-    "name": "Harmony Legal",
+    "name": "Simply Legal",
     "description": "Law firm management application",
     "duties": [
       "Create API",
@@ -30,14 +30,34 @@ const projects = [
       "Database design"
     ],
     "thumbnail": "harmony_thumb",
-    "mainImage": "nyan.gif"
+    "mainImage": "sl_main.png"
+  },
+  {
+    "name": "Simply Legal",
+    "description": "Law firm management application",
+    "duties": [
+      "Create API",
+      "Design and build front-end",
+      "Database design"
+    ],
+    "thumbnail": "harmony_thumb",
+    "mainImage": "sl_main.png"
+  },
+  {
+    "name": "Simply Legal",
+    "description": "Law firm management application",
+    "duties": [
+      "Create API",
+      "Design and build front-end",
+      "Database design"
+    ],
+    "thumbnail": "harmony_thumb",
+    "mainImage": "sl_main.png"
   }
 ]
 
 function choose(e) {
-  // $('.carousel').carousel()
   $('#portfolioCarousel').carousel(e)
-  // console.log($('.carousel').carousel('1'))
 }
 
 function makeCarousel() {
@@ -70,7 +90,7 @@ function makeCarousel() {
     contentItem.setAttribute('class', index === 0 ? 'carousel-item active' : 'carousel-item')
 
     let contentItemImage = document.createElement('IMG')
-    contentItemImage.setAttribute('class', 'd-block w-100')
+    contentItemImage.setAttribute('class', 'd-block w-100 img-fluid')
     contentItemImage.setAttribute('alt', project.name)
     contentItemImage.setAttribute('src', `images/${project.mainImage}`)
 
@@ -87,7 +107,7 @@ function makeCarousel() {
     contentItemCaption.appendChild(contentItemDescription)
 
     contentItem.appendChild(contentItemImage)
-    contentItem.appendChild(contentItemCaption)
+    // contentItem.appendChild(contentItemCaption)
 
     innerDiv.appendChild(contentItem)
   }
@@ -136,8 +156,43 @@ function makeCarousel() {
   carousel.appendChild(nextLink)
 }
 
+function makeProjectCards() {
+  // Grab the project-selector div
+  let projectSelector = document.getElementsByClassName('project-selector')
+
+  for (let [index, project] of projects.entries()) {
+    // Create the card
+    let card = document.createElement('DIV')
+    card.setAttribute('class', 'card text-center bg-light project shadow')
+    card.addEventListener('click', () => {choose(index)})
+
+    // Add elements to card
+    let image = document.createElement('IMG')
+    image.setAttribute('class', 'card-img-top border rounded')
+    image.setAttribute('src', `./images/${project.mainImage}`)
+
+    let cardBody = document.createElement('DIV')
+    cardBody.setAttribute('class', 'card-body')
+
+    let cardText = document.createElement('P')
+    cardText.setAttribute('class', 'card-text')
+    cardText.appendChild(document.createTextNode(project.name))
+
+    cardBody.appendChild(cardText)
+
+    // Put image and body into card
+    card.appendChild(image)
+    card.appendChild(cardBody)
+
+    // Add card into the project selector
+    projectSelector[0].appendChild(card)
+
+  }
+}
+
 function init() {
   makeCarousel()
+  makeProjectCards()
 }
 
 init()

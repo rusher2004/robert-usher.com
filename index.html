@@ -54,29 +54,15 @@
     </div>
   </header>
   <main role="main" class="container content">
-    <div class="content" style="overflow: scroll;">
-      <div id="portfolioCarousel" class="carousel slide" data-ride="carousel"></div>
-      <div class="project-selector">
-        <div class="project" onclick="choose(0)">
-          <img src="./images/ip_main.png" style="width: 160px" />
-          <span>Project 1</span>
-        </div>
-        <div class="project" onclick="choose(1)">
-          <img src="./images/ip_main.png" style="width: 160px" />
-          <span>Project 2</span>
-        </div>
-        <div class="project" onclick="choose(2)">
-          <img src="./images/ip_main.png" style="width: 160px" />
-          <span>Project 3</span>
-        </div>
-      </div>
-    </div>
+    <div id="portfolioCarousel" class="carousel slide d-none d-md-block" data-ride="carousel"></div>
+
+    <div class="project-selector"></div>
   </main>
-  <div class="footer">
+  <!-- <div class="footer">
     <div class="container">
       footer.
     </div>
-  </div>
+  </div> -->
 
   <script src="./js/script.js"></script>
   <!-- Optional JavaScript -->
@@ -93,6 +79,10 @@
 </body>
 
 <style>
+  body {
+    background-color: #f2f2f2;
+    padding-bottom: 20px;
+  }
   .header {
     position: fixed;
     top: 0;
@@ -126,7 +116,8 @@
     padding-left: 4px;
   }
   .content {
-    margin-top: 60px;
+    margin-top: 80px;
+    overflow: scroll;
   }
   .caption-block {
     background: rgb(212, 237, 218, .9);
@@ -156,33 +147,51 @@
   .carousel-controls:hover {
     background-color: #aaa;
     opacity: .5;
-    margin-top: 25px; 
-    margin-bottom: 50px;
+    /* margin-top: 25px;  */
+    /* margin-bottom: 50px; */
   }
     .carousel-controls.prev:hover {
     background-color: #aaa;
     opacity: .5;
-    margin-top: 25px; 
-    margin-bottom: 50px;
-    margin-left: 40px;
+    /* margin-top: 25px;  */
+    /* margin-bottom: 50px; */
+    /* margin-left: 40px; */
   }
   .carousel-controls.next:hover {
     background-color: #aaa;
     opacity: .5;
-    margin-top: 25px; 
-    margin-bottom: 50px;
-    margin-right: 40px;
+    /* margin-top: 25px;  */
+    /* margin-bottom: 50px; */
+    /* margin-right: 40px; */
   }
   .project-selector {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
+    margin-top: 25px;
   }
   .project {
-    display: flex;
-    flex-direction: column;
+    flex: 1;
     cursor: pointer;
+    padding: 10px;
+    margin-top: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+    min-width: 250px;
+    max-width: 250px;
   }
+  .project > img {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* @media screen and (max-width: 768px) {
+    .carousel {
+      display: none;
+    }
+  } */
 </style>
 
 </html>
