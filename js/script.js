@@ -1,58 +1,51 @@
+const hornTooter = "Full-Stack developer experienced in creating dynamic, data-driven applications."
 const projects = [
   {
     "name": "Harmony Legal",
+    "id": "hl",
     "description": "Law firm management application",
     "duties": [
       "Create API",
       "Design and build front-end",
       "Database design"
     ],
+    "skills": ['JavaScript', 'Neo4j', 'Node.js', 'HTML', 'CSS'],
     "thumbnail": "harmony_thumb",
-    "mainImage": "harmony_main.png"
+    "mainImage": "harmony_main.png",
+    "displayImage": "harmony_main.png",
+    "url": "https://harmonylegal.com"
   },
   {
     "name": "Informational Porpoises",
-    "description": "Taxonomy facts database",
+    "id": "ip",
+    "description": "Taxonomy browser and facts database (work in progress)",
     "duties": [
-      "Create API",
-      "Design and build front-end",
-      "Database design"
+      "Project Owner",
+      "UI Design",
+      "Front-end build and design",
+      "Back-end server build",
+      "database design"
     ],
+    "skills": ["JavaScript", "Python", "Neo4j", "Vue.js", "HTML", "CSS"],
     "thumbnail": "harmony_thumb",
-    "mainImage": "ip_main.png"
+    "mainImage": "ip_main.png",
+    "displayImage": "ip_main.png",
+    "url": "https://informational-porpoises.com"
   },
   {
     "name": "Simply Legal",
-    "description": "Law firm management application",
+    "id": "sl",
+    "description": "Immigration eligibility self-check app",
     "duties": [
-      "Create API",
-      "Design and build front-end",
+      "UI updates",
+      "User authentication implementation",
       "Database design"
     ],
+    "skills": ["JavaScript", "React", "Firebase"],
     "thumbnail": "harmony_thumb",
-    "mainImage": "sl_main.png"
-  },
-  {
-    "name": "Simply Legal",
-    "description": "Law firm management application",
-    "duties": [
-      "Create API",
-      "Design and build front-end",
-      "Database design"
-    ],
-    "thumbnail": "harmony_thumb",
-    "mainImage": "sl_main.png"
-  },
-  {
-    "name": "Simply Legal",
-    "description": "Law firm management application",
-    "duties": [
-      "Create API",
-      "Design and build front-end",
-      "Database design"
-    ],
-    "thumbnail": "harmony_thumb",
-    "mainImage": "sl_main.png"
+    "mainImage": "sl_main.png",
+    "displayImage": "sl_main.png",
+    "url": "https://simplylegalusa.com"
   }
 ]
 
@@ -64,27 +57,11 @@ function makeCarousel() {
   // Grab the carousel
   let carousel = document.getElementById('portfolioCarousel')
 
-  // Setup the indicators
-  let indicators = document.createElement('OL')
-  indicators.setAttribute('class', 'carousel-indicators')
-
   // Setup the carsousel content
   let innerDiv = document.createElement('DIV')
   innerDiv.setAttribute('class', 'carousel-inner')
 
   for (let [index, project] of projects.entries()) {
-    // Indicators
-    let indicatorItem = document.createElement('LI')
-    indicatorItem.setAttribute('data-target', '#portfolioCarousel')
-    indicatorItem.setAttribute('data-slide-to', index)
-
-    // Make the first item active
-    if (index === 0) {
-      indicatorItem.setAttribute('class', 'active')
-    }
-
-    indicators.appendChild(indicatorItem)
-
     // Carousel content items
     let contentItem = document.createElement('DIV')
     contentItem.setAttribute('class', index === 0 ? 'carousel-item active' : 'carousel-item')
@@ -92,7 +69,7 @@ function makeCarousel() {
     let contentItemImage = document.createElement('IMG')
     contentItemImage.setAttribute('class', 'd-block w-100 img-fluid')
     contentItemImage.setAttribute('alt', project.name)
-    contentItemImage.setAttribute('src', `images/${project.mainImage}`)
+    contentItemImage.setAttribute('src', `images/${project.displayImage}`)
 
     let contentItemCaption = document.createElement('DIV')
     contentItemCaption.setAttribute('class', 'carousel-caption d-none d-md-block caption-block')
@@ -111,9 +88,6 @@ function makeCarousel() {
 
     innerDiv.appendChild(contentItem)
   }
-
-  // Add indicators to carousel
-  carousel.appendChild(indicators)
 
   // Create controls
   let prevLink = document.createElement('A')
@@ -156,43 +130,132 @@ function makeCarousel() {
   carousel.appendChild(nextLink)
 }
 
-function makeProjectCards() {
-  // Grab the project-selector div
-  let projectSelector = document.getElementsByClassName('project-selector')
+function makeProjectsTabs () {
+  // Grab the container div
+  let projectSelector = document.getElementById('projectSelector')
+
+  let tabList = $(document.createElement('UL'))
+    .attr({
+      class: 'nav nav-pills mb-3 nav-fill',
+      id: 'pills-tab',
+      role: 'tablist'
+    })[0]
+
+  let tabContent = $(document.createElement('DIV'))
+    .attr({
+      class: 'tab-content',
+      id: 'pills-tabContent'
+    })[0]
 
   for (let [index, project] of projects.entries()) {
-    // Create the card
-    let card = document.createElement('DIV')
-    card.setAttribute('class', 'card text-center bg-light project shadow')
-    card.addEventListener('click', () => {choose(index)})
+    let listItem = document.createElement('LI')
+    listItem.setAttribute('class', 'nav-item')
 
-    // Add elements to card
-    let image = document.createElement('IMG')
-    image.setAttribute('class', 'card-img-top border rounded')
-    image.setAttribute('src', `./images/${project.mainImage}`)
+    let listItemLink = $(document.createElement('A'))
+      .attr({
+        class: index === 0 ? 'nav-link active' : 'nav-link',
+        id: `pills-${project.id}-tab`,
+        "data-toggle": 'pill',
+        href: `#pills-${project.id}`,
+        role: 'tab',
+        "aria-controls": `pills-${project.id}`,
+        "aria-selected": index === 0 ? 'true' : 'false'
+      })[0]
+    listItemLink.appendChild(document.createTextNode(project.name))
+    listItemLink.addEventListener('click', () => {choose(index)})
+    
+    listItem.appendChild(listItemLink)
 
-    let cardBody = document.createElement('DIV')
-    cardBody.setAttribute('class', 'card-body')
+    tabList.appendChild(listItem)
 
-    let cardText = document.createElement('P')
-    cardText.setAttribute('class', 'card-text')
-    cardText.appendChild(document.createTextNode(project.name))
+    let tabContentItem = $(document.createElement('DIV'))
+      .attr({
+        class: index === 0 ? 'tab-pane fade show active' : 'tab-pane fade',
+        role: 'tabpanel',
+        id: `pills-${project.id}`,
+        "aria-labeled-by": `pills-${project.id}-tab`
+      })[0]
+    
+    // Create some project details
+    // Image for mobile
+    let tabContentImage = $(document.createElement('img'))
+      .attr({
+        class: 'd-block w-100 img-fluid d-none d-sm-block d-md-none mobile-image',
+        src: `images/${project.displayImage}`,
+        alt: project.name
+      })[0]
+    
 
-    cardBody.appendChild(cardText)
+    // Description
+    let tabContentLabel = document.createElement('h5')
+    tabContentLabel.appendChild(document.createTextNode('Purpose: '))
 
-    // Put image and body into card
-    card.appendChild(image)
-    card.appendChild(cardBody)
+    let tabContentProjectDescription = document.createElement('small')
+    tabContentProjectDescription.appendChild(document.createTextNode(project.description))
 
-    // Add card into the project selector
-    projectSelector[0].appendChild(card)
+    tabContentLabel.appendChild(tabContentProjectDescription)
 
+    // Roles
+    let tabContentRolesLabel = document.createElement('h5')
+    tabContentRolesLabel.appendChild(document.createTextNode('Roles: '))
+
+    let tabContentRoles = document.createElement('small')
+    tabContentRoles.appendChild(document.createTextNode(project.duties.join(', ')))
+
+    tabContentRolesLabel.appendChild(tabContentRoles)
+
+    // Tools
+    let tabContentToolsLabel = document.createElement('h5')
+    tabContentToolsLabel.appendChild(document.createTextNode('Tools: '))
+
+    let tabContentTools = document.createElement('small')
+    tabContentTools.appendChild(document.createTextNode(project.skills.join(', ')))
+
+    tabContentToolsLabel.appendChild(tabContentTools)
+
+    // Link
+    let tabContentUrl = document.createElement('a')
+    tabContentUrl.setAttribute('class', 'project-link')
+    tabContentUrl.setAttribute('href', project.url)
+    tabContentUrl.setAttribute('target', '_blank')
+    tabContentUrl.appendChild(document.createTextNode('check it out'))
+
+    // Add details to tab content
+    tabContentItem.appendChild(tabContentImage)
+    tabContentItem.appendChild(tabContentLabel)
+    tabContentItem.appendChild(tabContentRolesLabel)
+    tabContentItem.appendChild(tabContentToolsLabel)
+    tabContentItem.appendChild(tabContentUrl)
+
+    tabContent.appendChild(tabContentItem)
   }
+
+  projectSelector.appendChild(tabList)
+  projectSelector.appendChild(tabContent)
 }
 
 function init() {
+  $('.hornTooting')[0].appendChild(document.createTextNode(hornTooter))
   makeCarousel()
-  makeProjectCards()
+  $('#portfolioCarousel').on('slide.bs.carousel', function (e) {
+    let skillIcons = document.getElementsByClassName('skill-icon')
+    for (icon of skillIcons) {
+      icon.style.opacity = 0.4
+      icon.style.height = "80%"
+    }
+   
+    for (let skill of projects[e.to].skills) {
+      let skillEl = document.getElementById(`skill-${skill}`)
+      skillEl.style.opacity = 1
+      skillEl.style.height = "100%"
+    }
+
+    // Activate the related project tab
+    $(`#pills-tab li:nth-child(${e.to + 1}) a`).tab('show')
+
+  })
+  // makeProjectCards()
+  makeProjectsTabs()
 }
 
 init()
