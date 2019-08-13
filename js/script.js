@@ -186,7 +186,7 @@ function makeProjectsTabs () {
         class: index === 0 ? 'tab-pane fade show active' : 'tab-pane fade',
         role: 'tabpanel',
         id: `pills-${project.id}`,
-        "aria-labeled-by": `pills-${project.id}-tab`
+        "aria-labeledby": `pills-${project.id}-tab`
       })[0]
     
     // Create some project details
