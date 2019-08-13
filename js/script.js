@@ -1,4 +1,4 @@
-const hornTooter = "Full-Stack developer experienced in creating dynamic, data-driven applications."
+const hornTooter = "Full-Stack developer experienced in creating dynamic, data-driven applications. Available for part-time and contract work."
 const projects = [
   {
     "name": "Harmony Legal",
