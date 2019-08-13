@@ -1,4 +1,17 @@
 const hornTooter = "Full-Stack developer experienced in creating dynamic, data-driven applications. Available for part-time and contract work."
+const iconFills = {
+  JavaScript: '#F7DF1F',
+  Python: '#3776AB',
+  Neo4j: '#008CC1',
+  "Node.js": '#339933',
+  GraphQL: "#E10098",
+  "Vue.js": '#4FC08D',
+  React: '#61DAFB',
+  Flask: '#000000',
+  Firebase: '#FFCA28',
+  HTML: '#E34F26',
+  CSS: '#1572B6'
+}
 const projects = [
   {
     "name": "Harmony Legal",
@@ -26,7 +39,7 @@ const projects = [
       "Back-end server build",
       "database design"
     ],
-    "skills": ["JavaScript", "Python", "Neo4j", "Vue.js", "HTML", "CSS"],
+    "skills": ["JavaScript", "Python", "Neo4j", "GraphQL", "Vue.js", "HTML", "CSS"],
     "thumbnail": "harmony_thumb",
     "mainImage": "ip_main.png",
     "displayImage": "ip_main.png",
@@ -240,14 +253,14 @@ function init() {
   $('#portfolioCarousel').on('slide.bs.carousel', function (e) {
     let skillIcons = document.getElementsByClassName('skill-icon')
     for (icon of skillIcons) {
-      icon.style.opacity = 0.4
-      icon.style.height = "80%"
+      // icon.style.opacity = 0.4
+      // icon.style.height = "80%"
+      icon.style.fill = '#aaa'
     }
    
     for (let skill of projects[e.to].skills) {
       let skillEl = document.getElementById(`skill-${skill}`)
-      skillEl.style.opacity = 1
-      skillEl.style.height = "100%"
+      skillEl.style.fill = iconFills[skill]
     }
 
     // Activate the related project tab
