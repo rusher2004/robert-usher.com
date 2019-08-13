@@ -62,6 +62,7 @@ const projects = [
   }
 ]
 
+// Update the carousel if a project is clicked
 function choose(e) {
   $('#portfolioCarousel').carousel(e)
 }
@@ -248,13 +249,18 @@ function makeProjectsTabs () {
 }
 
 function init() {
+  // Toot my horn
   $('.hornTooting')[0].appendChild(document.createTextNode(hornTooter))
+
+  // Build the project carousel
   makeCarousel()
+
+  // Switch icon styling as projects cycle
   $('#portfolioCarousel').on('slide.bs.carousel', function (e) {
+
+    // Grey out the icons, and fill the relevant skill icons with their proper color value
     let skillIcons = document.getElementsByClassName('skill-icon')
     for (icon of skillIcons) {
-      // icon.style.opacity = 0.4
-      // icon.style.height = "80%"
       icon.style.fill = '#aaa'
     }
    
@@ -267,7 +273,8 @@ function init() {
     $(`#pills-tab li:nth-child(${e.to + 1}) a`).tab('show')
 
   })
-  // makeProjectCards()
+
+  // Build the project info cards
   makeProjectsTabs()
 }
 
