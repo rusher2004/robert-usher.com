@@ -7,6 +7,7 @@ const iconFills = {
   GraphQL: "#E10098",
   "Vue.js": '#4FC08D',
   React: '#61DAFB',
+  "Riot.js": '#EA1E4A',
   Flask: '#000000',
   Firebase: '#FFCA28',
   HTML: '#E34F26',
@@ -22,7 +23,7 @@ const projects = [
       "Design and build front-end",
       "Database design"
     ],
-    "skills": ['JavaScript', 'Neo4j', 'Node.js', 'HTML', 'CSS'],
+    "skills": ['JavaScript', 'Neo4j', 'Node.js', 'Riot.js', 'HTML', 'CSS'],
     "thumbnail": "harmony_thumb",
     "mainImage": "harmony_main.png",
     "displayImage": "harmony_main.png",
@@ -187,7 +188,7 @@ function makeProjectsTabs () {
         class: index === 0 ? 'tab-pane fade show active' : 'tab-pane fade',
         role: 'tabpanel',
         id: `pills-${project.id}`,
-        "aria-labeledby": `pills-${project.id}-tab`
+        "aria-labelledby": `pills-${project.id}-tab`
       })[0]
     
     // Create some project details
@@ -232,10 +233,11 @@ function makeProjectsTabs () {
     tabContentUrl.setAttribute('class', 'project-link')
     tabContentUrl.setAttribute('href', project.url)
     tabContentUrl.setAttribute('target', '_blank')
+    tabContentUrl.setAttribute('rel', 'noopener')
     tabContentUrl.appendChild(document.createTextNode('check it out'))
 
     // Add details to tab content
-    tabContentItem.appendChild(tabContentImage)
+    // tabContentItem.appendChild(tabContentImage)
     tabContentItem.appendChild(tabContentLabel)
     tabContentItem.appendChild(tabContentRolesLabel)
     tabContentItem.appendChild(tabContentToolsLabel)
